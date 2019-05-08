@@ -25,7 +25,7 @@ class StatusCakeLatestIPs extends Controller
 
         $responses = (json_decode((string) $responses->getBody()));
 
-        return view ('welcome', compact('responses'));
+        return view ('index', compact('responses'));
     }
 
     /**
@@ -57,7 +57,20 @@ class StatusCakeLatestIPs extends Controller
      */
     public function show($id)
     {
-        //
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'https://app.statuscake.com/',
+            // You can set any number of default request options.
+            'timeout'  => 2.0,
+        ]);
+
+        $responses = $client->request('GET', 'API/SpeedLocations/json');
+
+        $responses = (json_decode((string) $responses->getBody()));
+
+        dd($responses);
+
+        return view ('show', compact('responses'));
     }
 
     /**

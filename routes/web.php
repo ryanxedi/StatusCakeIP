@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'StatusCakeLatestIPs@index');
+Route::resource('/latest', 'StatusCakeLatestIPs');
